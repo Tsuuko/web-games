@@ -20,7 +20,7 @@ export function Board({
   )
 
   return (
-    <div className="board">
+    <div class="othello-board">
       {board.map((row, rowIndex) =>
         row.map((cell, colIndex) => {
           const isValidMove = validMoveSet.has(`${rowIndex},${colIndex}`)

@@ -26,13 +26,13 @@ export function Cell({
 
   return (
     <div
-      className={`cell ${isValidMove ? 'valid-move' : ''} ${
+      class={`othello-cell ${isValidMove ? 'valid-move' : ''} ${
         isClickable && isValidMove ? 'clickable' : ''
       }`}
       onClick={handleClick}
     >
-      {piece && <div className={`piece ${piece}`} />}
-      {isValidMove && isClickable && <div className="valid-indicator" />}
+      {piece && <div class={`othello-piece ${piece}`} />}
+      {isValidMove && isClickable && <div class="othello-valid-indicator" />}
     </div>
   )
 }

@@ -1,40 +1,32 @@
-import { useOthelloGame } from './hooks/useOthelloGame'
-import { Board } from './components/Board'
-import { GameInfo } from './components/GameInfo'
-import { GameControls } from './components/GameControls'
+import { useState } from 'preact/hooks'
+import { Navigation } from './components/Navigation'
+import { HomePage } from './features/home/HomePage'
+import { OthelloPage } from './features/othello/OthelloPage'
+import { TetrisPage } from './features/tetris/TetrisPage'
 import './app.css'
 
-export function App() {
-  const { gameState, makeMove, passTurn, resetGame, blackCount, whiteCount } =
-    useOthelloGame('black')
+type Page = 'home' | 'othello' | 'tetris'
 
-  const isPlayerTurn =
-    gameState.gameStatus === 'playing' &&
-    gameState.currentPlayer === gameState.humanPlayer
+export function App() {
+  const [currentPage, setCurrentPage] = useState<Page>('home')
+
+  const renderPage = () => {
+    switch (currentPage) {
+      case 'home':
+        return <HomePage onNavigate={(page) => setCurrentPage(page)} />
+      case 'othello':
+        return <OthelloPage />
+      case 'tetris':
+        return <TetrisPage />
+      default:
+        return <HomePage onNavigate={(page) => setCurrentPage(page)} />
+    }
+  }
 
   return (
-    <div class="game-container">
-      <h1>オセロ</h1>
-      <GameInfo
-        blackCount={blackCount}
-        whiteCount={whiteCount}
-        currentPlayer={gameState.currentPlayer}
-        humanPlayer={gameState.humanPlayer}
-        gameStatus={gameState.gameStatus}
-      />
-      <Board
-        board={gameState.board}
-        validMoves={gameState.validMoves}
-        onCellClick={makeMove}
-        isPlayerTurn={isPlayerTurn}
-      />
-      <GameControls
-        onReset={resetGame}
-        gameStatus={gameState.gameStatus}
-        mustPass={gameState.mustPass}
-        onPass={passTurn}
-        gameResult={gameState.gameResult}
-      />
-    </div>
+    <>
+      <Navigation currentPage={currentPage} onPageChange={setCurrentPage} />
+      <main>{renderPage()}</main>
+    </>
   )
 }

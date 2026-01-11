@@ -19,23 +19,23 @@ export function GameInfo({
   const isHumanTurn = currentPlayer === humanPlayer
 
   return (
-    <div className="game-info">
-      <div className={`player-info ${isBlackTurn ? 'active' : ''}`}>
-        <div className="player-name">
+    <div class="othello-game-info">
+      <div class={`othello-player-info ${isBlackTurn ? 'active' : ''}`}>
+        <div class="othello-player-name">
           黒 {humanPlayer === 'black' ? '(あなた)' : '(AI)'}
         </div>
-        <div className="score">{blackCount}</div>
+        <div class="othello-score">{blackCount}</div>
       </div>
 
-      <div className={`player-info ${!isBlackTurn ? 'active' : ''}`}>
-        <div className="player-name">
+      <div class={`othello-player-info ${!isBlackTurn ? 'active' : ''}`}>
+        <div class="othello-player-name">
           白 {humanPlayer === 'white' ? '(あなた)' : '(AI)'}
         </div>
-        <div className="score">{whiteCount}</div>
+        <div class="othello-score">{whiteCount}</div>
       </div>
 
       {gameStatus === 'playing' && (
-        <div className="turn-info">
+        <div class="othello-turn-info">
           {isHumanTurn ? 'あなたのターン' : 'AIのターン'}
         </div>
       )}

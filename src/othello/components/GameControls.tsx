@@ -23,23 +23,23 @@ export function GameControls({
   }
 
   return (
-    <div className="game-controls">
+    <div class="othello-game-controls">
       {mustPass && gameStatus === 'playing' && (
-        <div className="message pass">
+        <div class="othello-message pass">
           <div>相手に置ける場所がありません。パスします。</div>
-          <button onClick={onPass} className="pass-button">
+          <button onClick={onPass} class="pass-button">
             パスする
           </button>
         </div>
       )}
 
       {gameStatus === 'finished' && (
-        <div className="message game-over">
-          <div className="result-text">{getResultMessage()}</div>
+        <div class="othello-message game-over">
+          <div class="othello-result-text">{getResultMessage()}</div>
         </div>
       )}
 
-      <button onClick={onReset} className="reset-button">
+      <button onClick={onReset} class="reset-button">
         新しいゲーム
       </button>
     </div>

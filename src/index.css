@@ -20,9 +20,6 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
@@ -30,6 +27,82 @@ body {
   width: 100%;
   min-height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+}
+
+/* ナビゲーション */
+.navigation {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+  height: 60px;
+}
+
+.nav-logo h1 {
+  font-size: 1.5rem;
+  color: #667eea;
+  margin: 0;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-item {
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  color: #666;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.nav-item:hover {
+  background: rgba(103, 126, 234, 0.1);
+  color: #667eea;
+}
+
+.nav-item.active {
+  background: #667eea;
+  color: white;
+}
+
+/* モバイル対応 */
+@media (max-width: 600px) {
+  .nav-container {
+    height: auto;
+    padding: 10px 15px;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-logo h1 {
+    font-size: 1.2rem;
+  }
+
+  .nav-menu {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .nav-item {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
 }

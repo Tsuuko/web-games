@@ -1,0 +1,246 @@
+/* オセロ専用スタイル */
+
+/* CSS変数 */
+:root {
+  --othello-board-color: #2e7d32;
+  --othello-border-color: #1b5e20;
+  --othello-cell-size: 50px;
+  --othello-piece-black: #1a1a1a;
+  --othello-piece-white: #f5f5f5;
+  --othello-highlight: rgba(255, 255, 0, 0.5);
+  --othello-hover-color: #388e3c;
+}
+
+/* ゲームコンテナ */
+.othello-game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  max-width: 95vw;
+}
+
+.othello-game-container h1 {
+  color: #333;
+  font-size: 2rem;
+  margin: 0;
+}
+
+/* ゲーム情報 */
+.othello-game-info {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.othello-player-info {
+  text-align: center;
+  padding: 15px 25px;
+  border-radius: 8px;
+  transition: all 0.3s;
+  background: #f5f5f5;
+  min-width: 120px;
+}
+
+.othello-player-info.active {
+  background: rgba(103, 126, 234, 0.2);
+  box-shadow: 0 0 0 3px #667eea;
+}
+
+.othello-player-name {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.othello-score {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.othello-turn-info {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #667eea;
+  padding: 10px 20px;
+  background: rgba(103, 126, 234, 0.1);
+  border-radius: 8px;
+}
+
+/* ボード */
+.othello-board {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 2px;
+  background: var(--othello-border-color);
+  padding: 8px;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.othello-cell {
+  width: var(--othello-cell-size);
+  height: var(--othello-cell-size);
+  background: var(--othello-board-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+  transition: background 0.2s;
+  position: relative;
+}
+
+.othello-cell.valid-move.clickable {
+  cursor: pointer;
+}
+
+.othello-cell.valid-move.clickable:hover {
+  background: var(--othello-hover-color);
+}
+
+/* 合法手インジケーター */
+.othello-valid-indicator {
+  width: 30%;
+  height: 30%;
+  background: var(--othello-highlight);
+  border-radius: 50%;
+  animation: othello-pulse 1.5s infinite;
+}
+
+@keyframes othello-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* 石 */
+.othello-piece {
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  position: absolute;
+}
+
+.othello-piece.black {
+  background: radial-gradient(circle at 30% 30%, #4a4a4a, var(--othello-piece-black));
+}
+
+.othello-piece.white {
+  background: radial-gradient(circle at 30% 30%, #ffffff, #d0d0d0);
+}
+
+/* ゲームコントロール */
+.othello-game-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  width: 100%;
+}
+
+.othello-message {
+  padding: 15px 25px;
+  border-radius: 8px;
+  font-weight: 500;
+  text-align: center;
+  max-width: 400px;
+}
+
+.othello-message.pass {
+  background: #fff3cd;
+  color: #856404;
+  border: 2px solid #ffc107;
+}
+
+.othello-message.game-over {
+  background: #d4edda;
+  color: #155724;
+  border: 2px solid #28a745;
+}
+
+.othello-result-text {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 600px) {
+  :root {
+    --othello-cell-size: 40px;
+  }
+
+  .othello-game-container {
+    padding: 20px 15px;
+    gap: 15px;
+  }
+
+  .othello-game-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .othello-game-info {
+    gap: 15px;
+  }
+
+  .othello-player-info {
+    padding: 10px 15px;
+    min-width: 100px;
+  }
+
+  .othello-score {
+    font-size: 1.5rem;
+  }
+
+  .othello-turn-info {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+
+  .othello-message {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 400px) {
+  :root {
+    --othello-cell-size: 35px;
+  }
+
+  .othello-board {
+    padding: 5px;
+  }
+
+  .othello-game-info {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .othello-player-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+  }
+
+  .othello-player-name {
+    margin-bottom: 0;
+  }
+}

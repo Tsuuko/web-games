@@ -1,183 +1,86 @@
-/* CSS変数 */
-:root {
-  --othello-board-color: #2e7d32;
-  --othello-border-color: #1b5e20;
-  --othello-cell-size: 50px;
-  --othello-piece-black: #1a1a1a;
-  --othello-piece-white: #f5f5f5;
-  --othello-highlight: rgba(255, 255, 0, 0.5);
-  --othello-hover-color: #388e3c;
+/* アプリケーション共通スタイル */
+
+/* ページコンテナ */
+.page-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-/* ゲームコンテナ */
-.game-container {
+/* ホームページ */
+.home-page {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  padding: 30px;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 16px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-  max-width: 95vw;
-}
-
-.game-container h1 {
-  color: #333;
-  font-size: 2rem;
-  margin: 0;
-}
-
-/* ゲーム情報 */
-.game-info {
-  display: flex;
   gap: 30px;
-  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  padding: 40px 20px;
 }
 
-.player-info {
-  text-align: center;
-  padding: 15px 25px;
-  border-radius: 8px;
-  transition: all 0.3s;
-  background: #f5f5f5;
-  min-width: 120px;
-}
-
-.player-info.active {
-  background: rgba(103, 126, 234, 0.2);
-  box-shadow: 0 0 0 3px #667eea;
-}
-
-.player-name {
-  font-size: 0.9rem;
-  color: #666;
-  margin-bottom: 5px;
-}
-
-.score {
-  font-size: 2rem;
-  font-weight: bold;
+.home-title {
+  font-size: 2.5rem;
   color: #333;
+  margin-bottom: 10px;
 }
 
-.turn-info {
-  text-align: center;
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: #667eea;
-  padding: 10px 20px;
-  background: rgba(103, 126, 234, 0.1);
-  border-radius: 8px;
+.home-subtitle {
+  font-size: 1.2rem;
+  color: #666;
 }
 
-/* ボード */
-.board {
+/* ゲームカード */
+.game-cards {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 2px;
-  background: var(--othello-border-color);
-  padding: 8px;
-  border-radius: 4px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  width: 100%;
+  max-width: 800px;
 }
 
-.cell {
-  width: var(--othello-cell-size);
-  height: var(--othello-cell-size);
-  background: var(--othello-board-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: default;
-  transition: background 0.2s;
-  position: relative;
-}
-
-.cell.valid-move.clickable {
+.game-card {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
 }
 
-.cell.valid-move.clickable:hover {
-  background: var(--othello-hover-color);
+.game-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
-/* 合法手インジケーター */
-.valid-indicator {
-  width: 30%;
-  height: 30%;
-  background: var(--othello-highlight);
-  border-radius: 50%;
-  animation: pulse 1.5s infinite;
+.game-card-title {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 10px;
 }
 
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 0.5;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.1);
-  }
+.game-card-description {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
 }
 
-/* 石 */
-.piece {
-  width: 80%;
-  height: 80%;
-  border-radius: 50%;
-  transition: transform 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  position: absolute;
-}
-
-.piece.black {
-  background: radial-gradient(circle at 30% 30%, #4a4a4a, var(--othello-piece-black));
-}
-
-.piece.white {
-  background: radial-gradient(circle at 30% 30%, #ffffff, #d0d0d0);
-}
-
-/* ゲームコントロール */
-.game-controls {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  align-items: center;
+.game-card-play-btn {
   width: 100%;
-}
-
-.message {
-  padding: 15px 25px;
+  padding: 12px;
+  background: #667eea;
+  color: white;
+  border: none;
   border-radius: 8px;
+  font-size: 1rem;
   font-weight: 500;
-  text-align: center;
-  max-width: 400px;
+  cursor: pointer;
+  transition: background 0.2s;
 }
 
-.message.pass {
-  background: #fff3cd;
-  color: #856404;
-  border: 2px solid #ffc107;
+.game-card-play-btn:hover {
+  background: #5568d3;
 }
 
-.message.game-over {
-  background: #d4edda;
-  color: #155724;
-  border: 2px solid #28a745;
-}
-
-.result-text {
-  font-size: 1.3rem;
-  font-weight: bold;
-}
-
-/* ボタン */
+/* 共通ボタン */
 button {
   padding: 12px 24px;
   border: none;
@@ -207,87 +110,26 @@ button:disabled {
   transform: none;
 }
 
-.pass-button {
-  margin-top: 10px;
-  background: #ffc107;
-  color: #333;
-}
-
-.pass-button:hover {
-  background: #e0a800;
-}
-
-.reset-button {
-  min-width: 150px;
-}
-
 /* レスポンシブ対応 */
 @media (max-width: 600px) {
-  :root {
-    --othello-cell-size: 40px;
+  .home-title {
+    font-size: 2rem;
   }
 
-  .game-container {
-    padding: 20px 15px;
-    gap: 15px;
+  .home-subtitle {
+    font-size: 1rem;
   }
 
-  .game-container h1 {
+  .game-cards {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .game-card {
+    padding: 20px;
+  }
+
+  .game-card-title {
     font-size: 1.5rem;
-  }
-
-  .game-info {
-    gap: 15px;
-  }
-
-  .player-info {
-    padding: 10px 15px;
-    min-width: 100px;
-  }
-
-  .score {
-    font-size: 1.5rem;
-  }
-
-  .turn-info {
-    font-size: 0.9rem;
-    padding: 8px 15px;
-  }
-
-  .message {
-    padding: 12px 20px;
-    font-size: 0.9rem;
-  }
-
-  button {
-    padding: 10px 20px;
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 400px) {
-  :root {
-    --othello-cell-size: 35px;
-  }
-
-  .board {
-    padding: 5px;
-  }
-
-  .game-info {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .player-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 10px 20px;
-  }
-
-  .player-name {
-    margin-bottom: 0;
   }
 }
