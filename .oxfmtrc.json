@@ -1,0 +1,8 @@
+{
+  "singleQuote": true,
+  "printWidth": 80,
+  "ignorePatterns": ["*routeTree.gen.ts"],
+  "experimentalSortImports": {
+    "enabled": true
+  }
+}

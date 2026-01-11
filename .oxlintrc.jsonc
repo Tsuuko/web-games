@@ -1,0 +1,26 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["import", "react", "jsx-a11y", "typescript", "promise", "node"],
+  "env": {
+    "browser": true,
+    "es2021": true,
+  },
+  "ignorePatterns": ["node_modules", "dist", "build", "coverage"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "pedantic": "warn",
+    "perf": "warn",
+    "style": "warn",
+    "restriction": "warn",
+  },
+  "rules": {
+    "no-named-export": "off",
+    "prefer-default-export": "off",
+    "no-console": "off",
+    "id-length": "off",
+    "no-named-as-default": "off",
+    "sort-imports": "off",
+    "typescript/consistent-type-imports": "error",
+  },
+}
