@@ -1,10 +1,11 @@
-import { Link, useLocation } from 'wouter-preact'
+import { Link, useLocation } from 'wouter-preact';
 
-type Page = 'home' | 'othello' | 'tetris'
+type Page = 'home' | 'othello' | 'tetris';
 
 export function Navigation() {
-  const [location] = useLocation()
-  const currentPage: Page = location === '/' ? 'home' : location.slice(1) as Page
+  const [location] = useLocation();
+  const currentPage: Page =
+    location === '/' ? 'home' : (location.slice(1) as Page);
 
   return (
     <nav className="navigation">
@@ -36,5 +37,5 @@ export function Navigation() {
         </div>
       </div>
     </nav>
-  )
+  );
 }

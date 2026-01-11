@@ -1,11 +1,12 @@
-import { Cell } from './Cell'
-import type { Board, Move } from '../game/types'
+import type { Board, Move } from '../game/types';
+
+import { Cell } from './Cell';
 
 interface BoardProps {
-  board: Board
-  validMoves: Move[]
-  onCellClick: (row: number, col: number) => void
-  isPlayerTurn: boolean
+  board: Board;
+  validMoves: Move[];
+  onCellClick: (row: number, col: number) => void;
+  isPlayerTurn: boolean;
 }
 
 export function Board({
@@ -15,15 +16,13 @@ export function Board({
   isPlayerTurn,
 }: BoardProps) {
   // 合法手のセットを高速参照用に作成
-  const validMoveSet = new Set(
-    validMoves.map((m) => `${m.row},${m.col}`)
-  )
+  const validMoveSet = new Set(validMoves.map((m) => `${m.row},${m.col}`));
 
   return (
     <div class="othello-board">
       {board.map((row, rowIndex) =>
         row.map((cell, colIndex) => {
-          const isValidMove = validMoveSet.has(`${rowIndex},${colIndex}`)
+          const isValidMove = validMoveSet.has(`${rowIndex},${colIndex}`);
           return (
             <Cell
               key={`${rowIndex}-${colIndex}`}
@@ -34,9 +33,9 @@ export function Board({
               onClick={onCellClick}
               isClickable={isPlayerTurn}
             />
-          )
-        })
+          );
+        }),
       )}
     </div>
-  )
+  );
 }

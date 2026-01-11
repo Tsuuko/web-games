@@ -1,11 +1,11 @@
-import type { PieceColor, GameStatus } from '../game/types'
+import type { PieceColor, GameStatus } from '../game/types';
 
 interface GameInfoProps {
-  blackCount: number
-  whiteCount: number
-  currentPlayer: PieceColor
-  humanPlayer: PieceColor
-  gameStatus: GameStatus
+  blackCount: number;
+  whiteCount: number;
+  currentPlayer: PieceColor;
+  humanPlayer: PieceColor;
+  gameStatus: GameStatus;
 }
 
 export function GameInfo({
@@ -15,8 +15,8 @@ export function GameInfo({
   humanPlayer,
   gameStatus,
 }: GameInfoProps) {
-  const isBlackTurn = currentPlayer === 'black'
-  const isHumanTurn = currentPlayer === humanPlayer
+  const isBlackTurn = currentPlayer === 'black';
+  const isHumanTurn = currentPlayer === humanPlayer;
 
   return (
     <div class="othello-game-info">
@@ -40,5 +40,5 @@ export function GameInfo({
         </div>
       )}
     </div>
-  )
+  );
 }

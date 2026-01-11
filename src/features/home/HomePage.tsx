@@ -1,4 +1,4 @@
-import { Link } from 'wouter-preact'
+import { Link } from 'wouter-preact';
 
 export function HomePage() {
   return (
@@ -11,7 +11,8 @@ export function HomePage() {
           <div class="game-card">
             <h2 class="game-card-title">オセロ</h2>
             <p class="game-card-description">
-              人間 vs AI のオセロゲーム。合法手の表示やパス判定などの標準機能を備えています。
+              人間 vs AI
+              のオセロゲーム。合法手の表示やパス判定などの標準機能を備えています。
             </p>
             <Link href="/othello" class="game-card-play-btn">
               プレイ
@@ -30,5 +31,5 @@ export function HomePage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

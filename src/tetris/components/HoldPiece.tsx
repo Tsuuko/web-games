@@ -1,10 +1,11 @@
-import type { Tetromino } from '../game/types'
-import { TETROMINO_COLORS } from '../game/tetrominoes'
+import type { Tetromino } from '../game/types';
+
+import { TETROMINO_COLORS } from '../game/tetrominoes';
 
 interface HoldPieceProps {
-  piece: Tetromino | null
-  canHold: boolean
-  onHold: () => void
+  piece: Tetromino | null;
+  canHold: boolean;
+  onHold: () => void;
 }
 
 export function HoldPiece({ piece, canHold, onHold }: HoldPieceProps) {
@@ -13,7 +14,10 @@ export function HoldPiece({ piece, canHold, onHold }: HoldPieceProps) {
       <h3>ホールド</h3>
       <div
         class="tetris-preview-grid"
-        style={{ cursor: canHold && piece ? 'pointer' : 'default', opacity: canHold ? 1 : 0.5 }}
+        style={{
+          cursor: canHold && piece ? 'pointer' : 'default',
+          opacity: canHold ? 1 : 0.5,
+        }}
         onClick={canHold ? onHold : undefined}
       >
         {piece ? (
@@ -24,12 +28,12 @@ export function HoldPiece({ piece, canHold, onHold }: HoldPieceProps) {
                 class="tetris-preview-cell"
                 style={cell ? `background: ${piece.color};` : ''}
               />
-            ))
+            )),
           )
         ) : (
           <div class="tetris-preview-empty">なし</div>
         )}
       </div>
     </div>
-  )
+  );
 }

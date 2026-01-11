@@ -1,4 +1,4 @@
-import type { TetrominoType, Shape, Tetromino } from './types'
+import type { TetrominoType, Shape, Tetromino } from './types';
 
 // テトリミノの形状定義
 export const TETROMINO_SHAPES: Record<TetrominoType, Shape[]> = {
@@ -184,7 +184,7 @@ export const TETROMINO_SHAPES: Record<TetrominoType, Shape[]> = {
       [false, true, false, false],
     ],
   ],
-}
+};
 
 // テトリミノの色
 export const TETROMINO_COLORS: Record<TetrominoType, string> = {
@@ -195,87 +195,87 @@ export const TETROMINO_COLORS: Record<TetrominoType, string> = {
   Z: '#f00000',
   J: '#0000f0',
   L: '#f0a000',
-}
+};
 
 // ランダムなテトリミノを生成
 export function getRandomTetrominoType(): TetrominoType {
-  const types: TetrominoType[] = ['I', 'O', 'T', 'S', 'Z', 'J', 'L']
-  return types[Math.floor(Math.random() * types.length)]
+  const types: TetrominoType[] = ['I', 'O', 'T', 'S', 'Z', 'J', 'L'];
+  return types[Math.floor(Math.random() * types.length)];
 }
 
 // テトリミノを作成
 export function createTetromino(
   type: TetrominoType,
-  position: { x: number; y: number }
+  position: { x: number; y: number },
 ): Tetromino {
   return {
     type,
     shape: TETROMINO_SHAPES[type][0], // 初期状態
     position,
     color: TETROMINO_COLORS[type],
-  }
+  };
 }
 
 // テトリミノを回転（時計回り）
 export function rotateTetromino(tetromino: Tetromino): Tetromino {
-  const { shape, type } = tetromino
-  const shapes = TETROMINO_SHAPES[type]
-  const currentIndex = shapes.findIndex((s) => s === shape)
-  const nextIndex = (currentIndex + 1) % shapes.length
+  const { shape, type } = tetromino;
+  const shapes = TETROMINO_SHAPES[type];
+  const currentIndex = shapes.findIndex((s) => s === shape);
+  const nextIndex = (currentIndex + 1) % shapes.length;
 
   return {
     ...tetromino,
     shape: shapes[nextIndex],
-  }
+  };
 }
 
 // テトリミノの幅を取得
 export function getTetrominoWidth(tetromino: Tetromino): number {
-  let minX = 4
-  let maxX = 0
+  let minX = 4;
+  let maxX = 0;
 
   for (let y = 0; y < 4; y++) {
     for (let x = 0; x < 4; x++) {
       if (tetromino.shape[y][x]) {
-        minX = Math.min(minX, x)
-        maxX = Math.max(maxX, x)
+        minX = Math.min(minX, x);
+        maxX = Math.max(maxX, x);
       }
     }
   }
 
-  return maxX - minX + 1
+  return maxX - minX + 1;
 }
 
 // テトリミノの高さを取得
 export function getTetrominoHeight(tetromino: Tetromino): number {
-  let minY = 4
-  let maxY = 0
+  let minY = 4;
+  let maxY = 0;
 
   for (let y = 0; y < 4; y++) {
     for (let x = 0; x < 4; x++) {
       if (tetromino.shape[y][x]) {
-        minY = Math.min(minY, y)
-        maxY = Math.max(maxY, y)
+        minY = Math.min(minY, y);
+        maxY = Math.max(maxY, y);
       }
     }
   }
 
-  return maxY - minY + 1
+  return maxY - minY + 1;
 }
 
 // バッグ（7バッグ）システム用
 export class TetrominoBag {
-  private bag: TetrominoType[] = []
+  private bag: TetrominoType[] = [];
 
   public getNext(): TetrominoType {
     if (this.bag.length === 0) {
-      this.bag = ['I', 'O', 'T', 'S', 'Z', 'J', 'L']
+      this.bag = ['I', 'O', 'T', 'S', 'Z', 'J', 'L'];
       // Fisher-Yatesシャッフル
       for (let i = this.bag.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1))
-        ;[this.bag[i], this.bag[j]] = [this.bag[j], this.bag[i]]
+        const j = Math.floor(Math.random() * (i + 1));
+        [this.bag[i], this.bag[j]] = [this.bag[j], this.bag[i]];
       }
     }
-    return this.bag.pop()!
+    return this.bag.pop()!;
   }
 }

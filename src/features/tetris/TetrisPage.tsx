@@ -1,12 +1,12 @@
-import { useTetrisGame } from '../../tetris/hooks/useTetrisGame'
-import { GameBoard } from '../../tetris/components/GameBoard'
-import { NextPiece } from '../../tetris/components/NextPiece'
-import { HoldPiece } from '../../tetris/components/HoldPiece'
-import { GameControls } from '../../tetris/components/GameControls'
-import '../../tetris/tetris.css'
+import { GameBoard } from '../../tetris/components/GameBoard';
+import { GameControls } from '../../tetris/components/GameControls';
+import { HoldPiece } from '../../tetris/components/HoldPiece';
+import { NextPiece } from '../../tetris/components/NextPiece';
+import { useTetrisGame } from '../../tetris/hooks/useTetrisGame';
+import '../../tetris/tetris.css';
 
 export function TetrisPage() {
-  const { gameState, ghostPiece, hold, togglePause, reset } = useTetrisGame()
+  const { gameState, ghostPiece, hold, togglePause, reset } = useTetrisGame();
 
   return (
     <div class="page-container">
@@ -16,7 +16,11 @@ export function TetrisPage() {
         <div class="tetris-game-area">
           {/* PC用: 左パネル（ホールド） */}
           <div class="tetris-side-panel-left">
-            <HoldPiece piece={gameState.holdPiece} canHold={gameState.canHold} onHold={hold} />
+            <HoldPiece
+              piece={gameState.holdPiece}
+              canHold={gameState.canHold}
+              onHold={hold}
+            />
           </div>
 
           {/* ボード */}
@@ -38,7 +42,11 @@ export function TetrisPage() {
 
           {/* モバイル用: 統合パネル（ホールド + 次） */}
           <div class="tetris-side-panel-mobile">
-            <HoldPiece piece={gameState.holdPiece} canHold={gameState.canHold} onHold={hold} />
+            <HoldPiece
+              piece={gameState.holdPiece}
+              canHold={gameState.canHold}
+              onHold={hold}
+            />
             <NextPiece piece={gameState.nextPiece} />
           </div>
         </div>
@@ -53,5 +61,5 @@ export function TetrisPage() {
         />
       </div>
     </div>
-  )
+  );
 }

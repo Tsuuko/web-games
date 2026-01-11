@@ -1,16 +1,16 @@
-import { useOthelloGame } from '../../othello/hooks/useOthelloGame'
-import { Board } from '../../othello/components/Board'
-import { GameInfo } from '../../othello/components/GameInfo'
-import { GameControls } from '../../othello/components/GameControls'
-import '../../othello/othello.css'
+import { Board } from '../../othello/components/Board';
+import { GameControls } from '../../othello/components/GameControls';
+import { GameInfo } from '../../othello/components/GameInfo';
+import { useOthelloGame } from '../../othello/hooks/useOthelloGame';
+import '../../othello/othello.css';
 
 export function OthelloPage() {
   const { gameState, makeMove, passTurn, resetGame, blackCount, whiteCount } =
-    useOthelloGame('black')
+    useOthelloGame('black');
 
   const isPlayerTurn =
     gameState.gameStatus === 'playing' &&
-    gameState.currentPlayer === gameState.humanPlayer
+    gameState.currentPlayer === gameState.humanPlayer;
 
   return (
     <div class="page-container">
@@ -38,5 +38,5 @@ export function OthelloPage() {
         />
       </div>
     </div>
-  )
+  );
 }

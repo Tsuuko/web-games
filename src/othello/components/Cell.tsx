@@ -1,13 +1,13 @@
-import type { CellState } from '../game/types'
-import type { Move } from '../game/types'
+import type { CellState } from '../game/types';
+import type { Move } from '../game/types';
 
 interface CellProps {
-  row: number
-  col: number
-  piece: CellState
-  isValidMove: boolean
-  onClick: (row: number, col: number) => void
-  isClickable: boolean
+  row: number;
+  col: number;
+  piece: CellState;
+  isValidMove: boolean;
+  onClick: (row: number, col: number) => void;
+  isClickable: boolean;
 }
 
 export function Cell({
@@ -20,9 +20,9 @@ export function Cell({
 }: CellProps) {
   const handleClick = () => {
     if (isClickable) {
-      onClick(row, col)
+      onClick(row, col);
     }
-  }
+  };
 
   return (
     <div
@@ -34,5 +34,5 @@ export function Cell({
       {piece && <div class={`othello-piece ${piece}`} />}
       {isValidMove && isClickable && <div class="othello-valid-indicator" />}
     </div>
-  )
+  );
 }

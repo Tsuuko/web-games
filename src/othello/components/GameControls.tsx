@@ -1,11 +1,11 @@
-import type { GameStatus, GameResult } from '../game/types'
+import type { GameStatus, GameResult } from '../game/types';
 
 interface GameControlsProps {
-  onReset: () => void
-  gameStatus: GameStatus
-  mustPass: boolean
-  onPass: () => void
-  gameResult: GameResult
+  onReset: () => void;
+  gameStatus: GameStatus;
+  mustPass: boolean;
+  onPass: () => void;
+  gameResult: GameResult;
 }
 
 export function GameControls({
@@ -16,11 +16,11 @@ export function GameControls({
   gameResult,
 }: GameControlsProps) {
   const getResultMessage = () => {
-    if (gameResult === 'black') return '黒の勝ち！'
-    if (gameResult === 'white') return '白の勝ち！'
-    if (gameResult === 'draw') return '引き分け！'
-    return ''
-  }
+    if (gameResult === 'black') return '黒の勝ち！';
+    if (gameResult === 'white') return '白の勝ち！';
+    if (gameResult === 'draw') return '引き分け！';
+    return '';
+  };
 
   return (
     <div class="othello-game-controls">
@@ -43,5 +43,5 @@ export function GameControls({
         新しいゲーム
       </button>
     </div>
-  )
+  );
 }

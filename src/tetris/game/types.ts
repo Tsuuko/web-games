@@ -1,43 +1,43 @@
 // テトリミノの種類
-export type TetrominoType = 'I' | 'O' | 'T' | 'S' | 'Z' | 'J' | 'L'
+export type TetrominoType = 'I' | 'O' | 'T' | 'S' | 'Z' | 'J' | 'L';
 
 // 位置
 export interface Position {
-  x: number
-  y: number
+  x: number;
+  y: number;
 }
 
 // セルの色
-export type CellColor = TetrominoType | 'ghost' | null
+export type CellColor = TetrominoType | 'ghost' | null;
 
 // ボード（10x20）
-export type Board = CellColor[][]
+export type Board = CellColor[][];
 
 // テトリミノの形状（4x4グリッド）
-export type Shape = boolean[][]
+export type Shape = boolean[][];
 
 // テトリミノ
 export interface Tetromino {
-  type: TetrominoType
-  shape: Shape
-  position: Position
-  color: string
+  type: TetrominoType;
+  shape: Shape;
+  position: Position;
+  color: string;
 }
 
 // ゲームの状態
-export type GameState = 'playing' | 'paused' | 'gameover'
+export type GameState = 'playing' | 'paused' | 'gameover';
 
 // ゲームの全状態
 export interface TetrisGameState {
-  board: Board
-  currentPiece: Tetromino | null
-  nextPiece: Tetromino | null
-  holdPiece: Tetromino | null
-  canHold: boolean
-  score: number
-  level: number
-  lines: number
-  gameState: GameState
+  board: Board;
+  currentPiece: Tetromino | null;
+  nextPiece: Tetromino | null;
+  holdPiece: Tetromino | null;
+  canHold: boolean;
+  score: number;
+  level: number;
+  lines: number;
+  gameState: GameState;
 }
 
 // ゲームアクション
@@ -54,4 +54,4 @@ export type TetrisGameAction =
   | { type: 'RESUME' }
   | { type: 'GAME_OVER' }
   | { type: 'RESET' }
-  | { type: 'TICK' }  // 自動落下用
+  | { type: 'TICK' }; // 自動落下用

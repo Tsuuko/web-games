@@ -1,12 +1,13 @@
-import type { Tetromino } from '../game/types'
-import { TETROMINO_COLORS } from '../game/tetrominoes'
+import type { Tetromino } from '../game/types';
+
+import { TETROMINO_COLORS } from '../game/tetrominoes';
 
 interface NextPieceProps {
-  piece: Tetromino | null
+  piece: Tetromino | null;
 }
 
 export function NextPiece({ piece }: NextPieceProps) {
-  if (!piece) return null
+  if (!piece) return null;
 
   return (
     <div class="tetris-preview">
@@ -19,9 +20,9 @@ export function NextPiece({ piece }: NextPieceProps) {
               class="tetris-preview-cell"
               style={cell ? `background: ${piece.color};` : ''}
             />
-          ))
+          )),
         )}
       </div>
     </div>
-  )
+  );
 }

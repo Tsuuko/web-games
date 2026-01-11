@@ -1,15 +1,22 @@
-import type { GameState } from '../game/types'
+import type { GameState } from '../game/types';
 
 interface GameControlsProps {
-  score: number
-  level: number
-  lines: number
-  gameState: GameState
-  onPause: () => void
-  onReset: () => void
+  score: number;
+  level: number;
+  lines: number;
+  gameState: GameState;
+  onPause: () => void;
+  onReset: () => void;
 }
 
-export function GameControls({ score, level, lines, gameState, onPause, onReset }: GameControlsProps) {
+export function GameControls({
+  score,
+  level,
+  lines,
+  gameState,
+  onPause,
+  onReset,
+}: GameControlsProps) {
   return (
     <div class="tetris-game-controls">
       <div class="tetris-stats">
@@ -69,5 +76,5 @@ export function GameControls({ score, level, lines, gameState, onPause, onReset 
         </div>
       </div>
     </div>
-  )
+  );
 }
