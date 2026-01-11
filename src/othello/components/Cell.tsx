@@ -1,5 +1,4 @@
 import type { CellState } from '../game/types';
-import type { Move } from '../game/types';
 
 interface CellProps {
   row: number;

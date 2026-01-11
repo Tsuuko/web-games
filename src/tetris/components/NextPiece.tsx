@@ -1,7 +1,5 @@
 import type { Tetromino } from '../game/types';
 
-import { TETROMINO_COLORS } from '../game/tetrominoes';
-
 interface NextPieceProps {
   piece: Tetromino | null;
 }

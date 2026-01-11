@@ -1,4 +1,4 @@
-import type { Board, CellColor, Tetromino } from './types';
+import type { Board, Tetromino } from './types';
 
 import { checkCollision } from './collision';
 
