@@ -1,25 +1,293 @@
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* CSS変数 */
+:root {
+  --othello-board-color: #2e7d32;
+  --othello-border-color: #1b5e20;
+  --othello-cell-size: 50px;
+  --othello-piece-black: #1a1a1a;
+  --othello-piece-white: #f5f5f5;
+  --othello-highlight: rgba(255, 255, 0, 0.5);
+  --othello-hover-color: #388e3c;
+}
+
+/* ゲームコンテナ */
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  max-width: 95vw;
+}
+
+.game-container h1 {
+  color: #333;
+  font-size: 2rem;
+  margin: 0;
+}
+
+/* ゲーム情報 */
+.game-info {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.player-info {
   text-align: center;
+  padding: 15px 25px;
+  border-radius: 8px;
+  transition: all 0.3s;
+  background: #f5f5f5;
+  min-width: 120px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.preact:hover {
-  filter: drop-shadow(0 0 2em #673ab8aa);
+.player-info.active {
+  background: rgba(103, 126, 234, 0.2);
+  box-shadow: 0 0 0 3px #667eea;
 }
 
-.card {
-  padding: 2em;
+.player-name {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 5px;
 }
 
-.read-the-docs {
-  color: #888;
+.score {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.turn-info {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #667eea;
+  padding: 10px 20px;
+  background: rgba(103, 126, 234, 0.1);
+  border-radius: 8px;
+}
+
+/* ボード */
+.board {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 2px;
+  background: var(--othello-border-color);
+  padding: 8px;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.cell {
+  width: var(--othello-cell-size);
+  height: var(--othello-cell-size);
+  background: var(--othello-board-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+  transition: background 0.2s;
+  position: relative;
+}
+
+.cell.valid-move.clickable {
+  cursor: pointer;
+}
+
+.cell.valid-move.clickable:hover {
+  background: var(--othello-hover-color);
+}
+
+/* 合法手インジケーター */
+.valid-indicator {
+  width: 30%;
+  height: 30%;
+  background: var(--othello-highlight);
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* 石 */
+.piece {
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  position: absolute;
+}
+
+.piece.black {
+  background: radial-gradient(circle at 30% 30%, #4a4a4a, var(--othello-piece-black));
+}
+
+.piece.white {
+  background: radial-gradient(circle at 30% 30%, #ffffff, #d0d0d0);
+}
+
+/* ゲームコントロール */
+.game-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  width: 100%;
+}
+
+.message {
+  padding: 15px 25px;
+  border-radius: 8px;
+  font-weight: 500;
+  text-align: center;
+  max-width: 400px;
+}
+
+.message.pass {
+  background: #fff3cd;
+  color: #856404;
+  border: 2px solid #ffc107;
+}
+
+.message.game-over {
+  background: #d4edda;
+  color: #155724;
+  border: 2px solid #28a745;
+}
+
+.result-text {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+/* ボタン */
+button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  background: #667eea;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  background: #5568d3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.pass-button {
+  margin-top: 10px;
+  background: #ffc107;
+  color: #333;
+}
+
+.pass-button:hover {
+  background: #e0a800;
+}
+
+.reset-button {
+  min-width: 150px;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 600px) {
+  :root {
+    --othello-cell-size: 40px;
+  }
+
+  .game-container {
+    padding: 20px 15px;
+    gap: 15px;
+  }
+
+  .game-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .game-info {
+    gap: 15px;
+  }
+
+  .player-info {
+    padding: 10px 15px;
+    min-width: 100px;
+  }
+
+  .score {
+    font-size: 1.5rem;
+  }
+
+  .turn-info {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+
+  .message {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 400px) {
+  :root {
+    --othello-cell-size: 35px;
+  }
+
+  .board {
+    padding: 5px;
+  }
+
+  .game-info {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .player-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+  }
+
+  .player-name {
+    margin-bottom: 0;
+  }
 }
