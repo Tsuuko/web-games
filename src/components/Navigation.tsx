@@ -1,52 +1,38 @@
-import { useState, useEffect } from 'preact/hooks'
+import { Link, useLocation } from 'wouter-preact'
 
 type Page = 'home' | 'othello' | 'tetris'
 
-interface NavigationProps {
-  currentPage: Page
-  onPageChange: (page: Page) => void
-}
-
-export function Navigation({ currentPage, onPageChange }: NavigationProps) {
-  // URLハッシュから初期ページを設定
-  useEffect(() => {
-    const hash = window.location.hash.slice(1) as Page
-    if (hash === 'othello' || hash === 'tetris' || hash === 'home') {
-      onPageChange(hash)
-    }
-  }, [])
-
-  // ページ変更時にハッシュを更新
-  const handlePageChange = (page: Page) => {
-    window.location.hash = page
-    onPageChange(page)
-  }
+export function Navigation() {
+  const [location] = useLocation()
+  const currentPage: Page = location === '/' ? 'home' : location.slice(1) as Page
 
   return (
     <nav className="navigation">
       <div className="nav-container">
         <div className="nav-logo">
-          <h1>Web Games</h1>
+          <Link href="/" className="nav-logo-link">
+            <h1>Web Games</h1>
+          </Link>
         </div>
         <div className="nav-menu">
-          <button
+          <Link
+            href="/"
             className={`nav-item ${currentPage === 'home' ? 'active' : ''}`}
-            onClick={() => handlePageChange('home')}
           >
             ホーム
-          </button>
-          <button
+          </Link>
+          <Link
+            href="/othello"
             className={`nav-item ${currentPage === 'othello' ? 'active' : ''}`}
-            onClick={() => handlePageChange('othello')}
           >
             オセロ
-          </button>
-          <button
+          </Link>
+          <Link
+            href="/tetris"
             className={`nav-item ${currentPage === 'tetris' ? 'active' : ''}`}
-            onClick={() => handlePageChange('tetris')}
           >
             テトリス
-          </button>
+          </Link>
         </div>
       </div>
     </nav>

@@ -56,6 +56,16 @@ body {
   margin: 0;
 }
 
+.nav-logo-link {
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s;
+}
+
+.nav-logo-link:hover {
+  opacity: 0.8;
+}
+
 .nav-menu {
   display: flex;
   gap: 8px;
