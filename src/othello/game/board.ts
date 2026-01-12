@@ -1,10 +1,12 @@
 import type { Board, PieceColor } from './types';
 
+export const BOARD_SIZE = 8;
+
 // 初期ボード作成
 export function createInitialBoard(): Board {
-  const board: Board = Array(8)
+  const board: Board = Array(BOARD_SIZE)
     .fill(null)
-    .map(() => Array(8).fill(null));
+    .map(() => Array(BOARD_SIZE).fill(null));
 
   // 中央に初期石を配置
   board[3][3] = 'white';
@@ -23,8 +25,8 @@ export function copyBoard(board: Board): Board {
 // 石の数をカウント
 export function countPieces(board: Board, color: PieceColor): number {
   let count = 0;
-  for (let row = 0; row < 8; row++) {
-    for (let col = 0; col < 8; col++) {
+  for (let row = 0; row < BOARD_SIZE; row++) {
+    for (let col = 0; col < BOARD_SIZE; col++) {
       if (board[row][col] === color) {
         count++;
       }

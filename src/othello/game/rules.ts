@@ -1,4 +1,5 @@
 import type { Board, PieceColor, Move, Direction, GameResult } from './types';
+import { BOARD_SIZE } from './board';
 
 // 8方向の定義
 export const DIRECTIONS: Direction[] = [
@@ -14,7 +15,7 @@ export const DIRECTIONS: Direction[] = [
 
 // 位置がボード内かチェック
 export function isValidPosition(row: number, col: number): boolean {
-  return row >= 0 && row < 8 && col >= 0 && col < 8;
+  return row >= 0 && row < BOARD_SIZE && col >= 0 && col < BOARD_SIZE;
 }
 
 // 指定方向に反転できる石を取得
@@ -97,8 +98,8 @@ export function isValidMove(
 export function getValidMoves(board: Board, color: PieceColor): Move[] {
   const validMoves: Move[] = [];
 
-  for (let row = 0; row < 8; row++) {
-    for (let col = 0; col < 8; col++) {
+  for (let row = 0; row < BOARD_SIZE; row++) {
+    for (let col = 0; col < BOARD_SIZE; col++) {
       if (isValidMove(board, row, col, color)) {
         validMoves.push({ row, col });
       }
@@ -143,8 +144,8 @@ export function determineWinner(board: Board): GameResult {
   let blackCount = 0;
   let whiteCount = 0;
 
-  for (let row = 0; row < 8; row++) {
-    for (let col = 0; col < 8; col++) {
+  for (let row = 0; row < BOARD_SIZE; row++) {
+    for (let col = 0; col < BOARD_SIZE; col++) {
       if (board[row][col] === 'black') {
         blackCount++;
       } else if (board[row][col] === 'white') {
