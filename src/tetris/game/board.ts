@@ -79,8 +79,3 @@ export function getGhostPosition(
 
   return { x: piece.position.x, y: ghostY };
 }
-
-// ピースが見えるかチェック
-export function isPieceVisible(piece: Tetromino): boolean {
-  return piece.position.y < 20;
-}
