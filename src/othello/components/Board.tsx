@@ -1,6 +1,7 @@
 import type { Board, Move } from '../game/types';
 
 import { Cell } from './Cell';
+import { useMemo } from 'preact/hooks';
 
 interface BoardProps {
   board: Board;
@@ -16,7 +17,10 @@ export function Board({
   isPlayerTurn,
 }: BoardProps) {
   // 合法手のセットを高速参照用に作成
-  const validMoveSet = new Set(validMoves.map((m) => `${m.row},${m.col}`));
+  const validMoveSet = useMemo(
+    () => new Set(validMoves.map((m) => `${m.row},${m.col}`)),
+    [validMoves],
+  );
 
   return (
     <div class="othello-board">
