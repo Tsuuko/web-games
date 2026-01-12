@@ -426,12 +426,14 @@ export function useTetrisGame() {
     });
 
     return () => {
-      target.removeEventListener(
-        'touchstart',
-        handleTouchStart as EventListener,
-      );
-      target.removeEventListener('touchmove', handleTouchMove as EventListener);
-      target.removeEventListener('touchend', handleTouchEnd as EventListener);
+      if (target) {
+        target.removeEventListener(
+          'touchstart',
+          handleTouchStart as EventListener,
+        );
+        target.removeEventListener('touchmove', handleTouchMove as EventListener);
+        target.removeEventListener('touchend', handleTouchEnd as EventListener);
+      }
     };
   }, [handleTouchStart, handleTouchMove, handleTouchEnd]);
 
