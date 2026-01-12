@@ -82,23 +82,41 @@ pnpm preview
 src/
 ├── components/          # 共通コンポーネント
 │   └── Navigation.tsx   # ナビゲーションメニュー
-├── features/           # ページコンポーネント
-│   ├── home/
-│   │   └── HomePage.tsx
-│   ├── othello/
-│   │   └── OthelloPage.tsx
-│   └── tetris/
-│       └── TetrisPage.tsx
-├── othello/            # オセロゲーム
-│   ├── components/
-│   ├── game/
-│   ├── hooks/
-│   └── othello.css
-└── tetris/             # テトリスゲーム
-    ├── components/
-    ├── game/
-    ├── hooks/
-    └── tetris.css
+└── features/           # ゲーム機能別モジュール
+    ├── home/           # ホームページ
+    │   └── HomePage.tsx
+    ├── othello/        # オセロゲーム
+    │   ├── OthelloPage.tsx
+    │   ├── components/ # オセロ用コンポーネント
+    │   │   ├── Board.tsx
+    │   │   ├── Cell.tsx
+    │   │   ├── GameControls.tsx
+    │   │   └── GameInfo.tsx
+    │   ├── game/       # ゲームロジック
+    │   │   ├── ai.ts
+    │   │   ├── board.ts
+    │   │   ├── rules.ts
+    │   │   └── types.ts
+    │   ├── hooks/      # カスタムフック
+    │   │   └── useOthelloGame.ts
+    │   └── othello.css
+    └── tetris/         # テトリスゲーム
+        ├── TetrisPage.tsx
+        ├── components/ # テトリス用コンポーネント
+        │   ├── GameBoard.tsx
+        │   ├── GameControls.tsx
+        │   ├── HoldPiece.tsx
+        │   └── NextPiece.tsx
+        ├── game/       # ゲームロジック
+        │   ├── board.ts
+        │   ├── collision.ts
+        │   ├── rotation.ts
+        │   ├── scoring.ts
+        │   ├── tetrominoes.ts
+        │   └── types.ts
+        ├── hooks/      # カスタムフック
+        │   └── useTetrisGame.ts
+        └── tetris.css
 ```
 
 ## 📝 スクリプト

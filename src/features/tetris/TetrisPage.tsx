@@ -1,9 +1,9 @@
-import { GameBoard } from '../../tetris/components/GameBoard';
-import { GameControls } from '../../tetris/components/GameControls';
-import { HoldPiece } from '../../tetris/components/HoldPiece';
-import { NextPiece } from '../../tetris/components/NextPiece';
-import { useTetrisGame } from '../../tetris/hooks/useTetrisGame';
-import '../../tetris/tetris.css';
+import { GameBoard } from './components/GameBoard';
+import { GameControls } from './components/GameControls';
+import { HoldPiece } from './components/HoldPiece';
+import { NextPiece } from './components/NextPiece';
+import { useTetrisGame } from './hooks/useTetrisGame';
+import './tetris.css';
 
 export function TetrisPage() {
   const { gameState, ghostPiece, hold, togglePause, reset } = useTetrisGame();

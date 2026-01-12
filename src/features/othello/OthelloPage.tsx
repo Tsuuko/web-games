@@ -1,8 +1,8 @@
-import { Board } from '../../othello/components/Board';
-import { GameControls } from '../../othello/components/GameControls';
-import { GameInfo } from '../../othello/components/GameInfo';
-import { useOthelloGame } from '../../othello/hooks/useOthelloGame';
-import '../../othello/othello.css';
+import { Board } from './components/Board';
+import { GameControls } from './components/GameControls';
+import { GameInfo } from './components/GameInfo';
+import { useOthelloGame } from './hooks/useOthelloGame';
+import './othello.css';
 
 export function OthelloPage() {
   const { gameState, makeMove, passTurn, resetGame, blackCount, whiteCount } =

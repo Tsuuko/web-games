@@ -28,7 +28,6 @@ export type GameState = {
   gameResult: GameResult;
   validMoves: Move[];
   mustPass: boolean;
-  passCount: number; // 連続パス回数（2回でゲーム終了）
   isProcessing: boolean; // 手の処理中フラグ
 };
 
