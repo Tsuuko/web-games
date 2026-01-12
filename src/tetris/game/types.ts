@@ -38,6 +38,7 @@ export interface TetrisGameState {
   level: number;
   lines: number;
   gameState: GameState;
+  bag?: any; // TetrominoBagインスタンスを保持
 }
 
 // ゲームアクション

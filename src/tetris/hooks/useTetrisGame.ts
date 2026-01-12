@@ -27,6 +27,7 @@ const INITIAL_STATE: TetrisGameState = {
   level: 1,
   lines: 0,
   gameState: 'playing',
+  bag: new TetrominoBag(),
 };
 
 function gameReducer(
@@ -43,6 +44,7 @@ function gameReducer(
         ...INITIAL_STATE,
         currentPiece,
         nextPiece,
+        bag,
       };
     }
 
@@ -121,7 +123,7 @@ function gameReducer(
       const newLines = state.lines + clearedLines;
       const newLevel = calculateLevel(newLines);
 
-      const bag = new TetrominoBag();
+      const bag = state.bag || new TetrominoBag();
       const nextPiece =
         state.nextPiece || createTetromino(bag.getNext(), { x: 0, y: 0 });
       const newCurrentPiece = createTetromino(bag.getNext(), { x: 3, y: 0 });
@@ -140,6 +142,7 @@ function gameReducer(
         lines: newLines,
         level: newLevel,
         canHold: true,
+        bag,
       };
     }
 
@@ -166,21 +169,31 @@ function gameReducer(
       )
         return state;
 
-      const bag = new TetrominoBag();
+      const bag = state.bag || new TetrominoBag();
       const holdPiece = { ...state.currentPiece, position: { x: 0, y: 0 } };
 
       let newCurrentPiece: Tetromino;
+      let newNextPiece = state.nextPiece;
+      
       if (state.holdPiece) {
         newCurrentPiece = { ...state.holdPiece, position: { x: 3, y: 0 } };
       } else {
-        newCurrentPiece = createTetromino(bag.getNext(), { x: 3, y: 0 });
+        // holdPieceがない場合は、nextPieceを使用し、新しいnextPieceを生成
+        if (state.nextPiece) {
+          newCurrentPiece = { ...state.nextPiece, position: { x: 3, y: 0 } };
+          newNextPiece = createTetromino(bag.getNext(), { x: 0, y: 0 });
+        } else {
+          newCurrentPiece = createTetromino(bag.getNext(), { x: 3, y: 0 });
+        }
       }
 
       return {
         ...state,
         currentPiece: newCurrentPiece,
+        nextPiece: newNextPiece,
         holdPiece,
         canHold: false,
+        bag,
       };
     }
 
@@ -206,6 +219,7 @@ function gameReducer(
         board: createInitialBoard(),
         currentPiece,
         nextPiece,
+        bag,
       };
     }
 
@@ -231,7 +245,7 @@ function gameReducer(
       const newLines = state.lines + clearedLines;
       const newLevel = calculateLevel(newLines);
 
-      const bag = new TetrominoBag();
+      const bag = state.bag || new TetrominoBag();
       const nextPiece =
         state.nextPiece || createTetromino(bag.getNext(), { x: 0, y: 0 });
       const newCurrentPiece = createTetromino(bag.getNext(), { x: 3, y: 0 });
@@ -250,6 +264,7 @@ function gameReducer(
         lines: newLines,
         level: newLevel,
         canHold: true,
+        bag,
       };
     }
 
