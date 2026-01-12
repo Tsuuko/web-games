@@ -162,6 +162,12 @@ export function useOthelloGame(humanPlayer: PieceColor = 'black') {
     if (gameState.gameStatus !== 'playing') return;
     if (gameState.isProcessing) return; // 処理中は新しい手を受け付けない
 
+    // 合法手かどうかをチェック
+    const isValid = gameState.validMoves.some(
+      (m) => m.row === row && m.col === col,
+    );
+    if (!isValid) return;
+
     dispatch({ type: 'START_PROCESSING' });
     dispatch({ type: 'MAKE_MOVE', payload: { row, col } });
 

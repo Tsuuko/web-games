@@ -18,7 +18,7 @@ export function Cell({
   isClickable,
 }: CellProps) {
   const handleClick = () => {
-    if (isClickable) {
+    if (isClickable && isValidMove) {
       onClick(row, col);
     }
   };
