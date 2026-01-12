@@ -44,7 +44,6 @@ export type GameAction =
   | { type: 'MAKE_MOVE'; payload: { row: number; col: number } }
   | { type: 'SWITCH_TURN' }
   | { type: 'PASS' }
-  | { type: 'AI_MOVE' }
   | { type: 'GAME_OVER'; payload: GameResult }
   | { type: 'RESET' }
   | { type: 'START_PROCESSING' }

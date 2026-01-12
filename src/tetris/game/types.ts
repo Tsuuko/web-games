@@ -49,7 +49,6 @@ export type TetrisGameAction =
   | { type: 'MOVE_DOWN' }
   | { type: 'HARD_DROP' }
   | { type: 'ROTATE' }
-  | { type: 'SOFT_DROP' }
   | { type: 'HOLD' }
   | { type: 'PAUSE' }
   | { type: 'RESUME' }

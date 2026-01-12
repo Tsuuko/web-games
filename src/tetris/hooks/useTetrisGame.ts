@@ -156,11 +156,6 @@ function gameReducer(
       return state;
     }
 
-    case 'SOFT_DROP': {
-      // 状態は変化させない（TICKで処理）
-      return state;
-    }
-
     case 'HOLD': {
       if (
         !state.currentPiece ||
