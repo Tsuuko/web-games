@@ -14,7 +14,12 @@ import {
 } from '../game/board';
 import { checkCollision } from '../game/collision';
 import { rotateWithKicks } from '../game/rotation';
-import { calculateScore, calculateLevel, getDropSpeed } from '../game/scoring';
+import {
+  calculateScore,
+  calculateHardDropScore,
+  calculateLevel,
+  getDropSpeed,
+} from '../game/scoring';
 import { createTetromino, TetrominoBag } from '../game/tetrominoes';
 
 const INITIAL_STATE: TetrisGameState = {
@@ -94,7 +99,7 @@ function gameReducer(
       };
 
       if (!checkCollision(state.board, newPiece)) {
-        return { ...state, currentPiece: newPiece, score: state.score + 1 };
+        return { ...state, currentPiece: newPiece };
       }
       return state;
     }
@@ -119,7 +124,11 @@ function gameReducer(
 
       const newBoard = lockPiece(state.board, droppedPiece);
       const { newBoard: clearedBoard, clearedLines } = clearLines(newBoard);
-      const newScore = state.score + calculateScore(clearedLines, state.level);
+      const dropDistance = newY - state.currentPiece.position.y;
+      const newScore =
+        state.score +
+        calculateHardDropScore(dropDistance) +
+        calculateScore(clearedLines, state.level);
       const newLines = state.lines + clearedLines;
       const newLevel = calculateLevel(newLines);
 

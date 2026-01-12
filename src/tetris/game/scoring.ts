@@ -1,7 +1,11 @@
 // スコア計算
 export function calculateScore(lines: number, level: number): number {
-  const baseScores = [0, 100, 300, 500, 800];
+  const baseScores = [0, 40, 100, 300, 1200];
   return baseScores[lines] * level;
+}
+
+export function calculateHardDropScore(dropDistance: number): number {
+  return dropDistance * 2;
 }
 
 // レベル計算（10ラインごとにレベルアップ）
