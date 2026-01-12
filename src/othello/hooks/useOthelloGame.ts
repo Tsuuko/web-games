@@ -205,7 +205,7 @@ export function useOthelloGame(humanPlayer: PieceColor = 'black') {
     }, 500); // 0.5秒の遅延で自然な体験に
 
     return () => clearTimeout(timer);
-  }, [gameState.currentPlayer, gameState.validMoves, gameState.mustPass, gameState.isProcessing]);
+  }, [gameState.gameStatus, gameState.currentPlayer, gameState.validMoves, gameState.mustPass, gameState.isProcessing]);
 
   // スコア計算
   const { black, white } = countAllPieces(gameState.board);
