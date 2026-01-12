@@ -14,7 +14,6 @@ const INITIAL_STATE: GameState = {
   gameResult: null,
   validMoves: [],
   mustPass: false,
-  passCount: 0,
   isProcessing: false,
 };
 
@@ -56,7 +55,6 @@ function gameReducer(state: GameState, action: GameAction): GameState {
       return {
         ...state,
         board: newBoard,
-        passCount: 0, // 石を置いたのでパス回数をリセット
       };
     }
 
@@ -119,7 +117,6 @@ function gameReducer(state: GameState, action: GameAction): GameState {
         currentPlayer: newPlayer,
         validMoves,
         mustPass: false,
-        passCount: state.passCount + 1,
       };
     }
 
