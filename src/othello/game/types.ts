@@ -29,6 +29,7 @@ export type GameState = {
   validMoves: Move[];
   mustPass: boolean;
   passCount: number; // 連続パス回数（2回でゲーム終了）
+  isProcessing: boolean; // 手の処理中フラグ
 };
 
 // 方向ベクトル（8方向）
@@ -45,4 +46,6 @@ export type GameAction =
   | { type: 'PASS' }
   | { type: 'AI_MOVE' }
   | { type: 'GAME_OVER'; payload: GameResult }
-  | { type: 'RESET' };
+  | { type: 'RESET' }
+  | { type: 'START_PROCESSING' }
+  | { type: 'END_PROCESSING' };

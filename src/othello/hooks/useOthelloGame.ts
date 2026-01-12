@@ -15,6 +15,7 @@ const INITIAL_STATE: GameState = {
   validMoves: [],
   mustPass: false,
   passCount: 0,
+  isProcessing: false,
 };
 
 function gameReducer(state: GameState, action: GameAction): GameState {
@@ -29,6 +30,20 @@ function gameReducer(state: GameState, action: GameAction): GameState {
         board,
         currentPlayer,
         validMoves,
+      };
+    }
+
+    case 'START_PROCESSING': {
+      return {
+        ...state,
+        isProcessing: true,
+      };
+    }
+
+    case 'END_PROCESSING': {
+      return {
+        ...state,
+        isProcessing: false,
       };
     }
 
@@ -70,6 +85,7 @@ function gameReducer(state: GameState, action: GameAction): GameState {
             gameResult,
             validMoves: [],
             mustPass: false,
+            isProcessing: false,
           };
         }
 
@@ -78,6 +94,7 @@ function gameReducer(state: GameState, action: GameAction): GameState {
           ...state,
           mustPass: true,
           validMoves: currentPlayerMoves,
+          isProcessing: false,
         };
       }
 
@@ -87,6 +104,7 @@ function gameReducer(state: GameState, action: GameAction): GameState {
         currentPlayer: newPlayer,
         validMoves,
         mustPass: false,
+        isProcessing: false,
       };
     }
 
@@ -142,7 +160,9 @@ export function useOthelloGame(humanPlayer: PieceColor = 'black') {
   // 手を実行
   const makeMove = (row: number, col: number) => {
     if (gameState.gameStatus !== 'playing') return;
+    if (gameState.isProcessing) return; // 処理中は新しい手を受け付けない
 
+    dispatch({ type: 'START_PROCESSING' });
     dispatch({ type: 'MAKE_MOVE', payload: { row, col } });
 
     // 次のターンへ
@@ -168,11 +188,13 @@ export function useOthelloGame(humanPlayer: PieceColor = 'black') {
     if (gameState.gameStatus !== 'playing') return;
     if (gameState.currentPlayer === gameState.humanPlayer) return;
     if (gameState.mustPass) return;
+    if (gameState.isProcessing) return; // 処理中は何もしない
 
     // AIのターン
     const timer = setTimeout(() => {
       const move = selectRandomMove(gameState.validMoves);
       if (move) {
+        dispatch({ type: 'START_PROCESSING' });
         dispatch({ type: 'MAKE_MOVE', payload: move });
 
         // 次のターンへ
@@ -183,7 +205,7 @@ export function useOthelloGame(humanPlayer: PieceColor = 'black') {
     }, 500); // 0.5秒の遅延で自然な体験に
 
     return () => clearTimeout(timer);
-  }, [gameState.currentPlayer, gameState.validMoves, gameState.mustPass]);
+  }, [gameState.currentPlayer, gameState.validMoves, gameState.mustPass, gameState.isProcessing]);
 
   // スコア計算
   const { black, white } = countAllPieces(gameState.board);
