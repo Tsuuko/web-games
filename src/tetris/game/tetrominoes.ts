@@ -276,6 +276,10 @@ export class TetrominoBag {
         [this.bag[i], this.bag[j]] = [this.bag[j], this.bag[i]];
       }
     }
-    return this.bag.pop()!;
+    const next = this.bag.pop();
+    if (!next) {
+      throw new Error('TetrominoBag is empty');
+    }
+    return next;
   }
 }
