@@ -26,7 +26,7 @@ export function GameControls({
     <div class="othello-game-controls">
       {mustPass && gameStatus === 'playing' && (
         <div class="othello-message pass">
-          <div>相手に置ける場所がありません。パスします。</div>
+          <div>置ける場所がありません。パスします。</div>
           <button onClick={onPass} class="pass-button">
             パスする
           </button>
